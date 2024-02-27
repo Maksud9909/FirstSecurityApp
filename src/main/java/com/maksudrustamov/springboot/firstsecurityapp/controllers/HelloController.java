@@ -20,13 +20,13 @@ public class HelloController {
 
 
     @GetMapping("/showUserInfo")
-    public String showUserInfo(Model model){
+    public String showUserInfo(){
         // через SecurityContextHolder мы получаем доступ к обертеке Person, а через обертку уже получаем доступ к самой сущности
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal(); // закастили до человека, который регался
         System.out.println(personDetails.getPerson());
 
-        model.addAttribute("personInfo",personDetails);
+
 
         return "hello";
     }

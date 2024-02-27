@@ -15,7 +15,7 @@ public class PersonDetails implements UserDetails {
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { // права доступа, какому то юзеру нельзя будет заходить куда-то
+    public Collection<? extends GrantedAuthority> getAuthorities() { // права доступа, к какому-то юзеру нельзя будет заходить куда-то
         return null;
     }
 

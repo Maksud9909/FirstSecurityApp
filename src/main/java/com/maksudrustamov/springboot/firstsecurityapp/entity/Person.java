@@ -1,9 +1,15 @@
 package com.maksudrustamov.springboot.firstsecurityapp.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+//import jakarta.persistence.*;
+//import jakarta.validation.constraints.Min;
+//import jakarta.validation.constraints.NotEmpty;
+//import jakarta.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Person")
