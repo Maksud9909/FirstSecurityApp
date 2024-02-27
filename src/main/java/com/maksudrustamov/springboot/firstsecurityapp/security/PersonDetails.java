@@ -48,4 +48,10 @@ public class PersonDetails implements UserDetails {
     public boolean isEnabled() { // этот аккаунт работает ли, включен ли он
         return true;
     }
+
+
+    // нужно, чтобы получать данные аутентифициоравнного пользователя
+    public Person getPerson(){
+        return this.person;
+    }
 }
