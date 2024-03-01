@@ -2,6 +2,7 @@ package com.maksudrustamov.springboot.firstsecurityapp.controllers;
 
 
 import com.maksudrustamov.springboot.firstsecurityapp.entity.Person;
+import com.maksudrustamov.springboot.firstsecurityapp.service.PeopleService;
 import com.maksudrustamov.springboot.firstsecurityapp.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,13 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-    PersonValidator personValidator;
+    private final PersonValidator personValidator;
+    private final PeopleService peopleService;
 
     @Autowired
-    public AuthController(PersonValidator personValidator) {
+    public AuthController(PersonValidator personValidator, PeopleService peopleService) {
         this.personValidator = personValidator;
+        this.peopleService = peopleService;
     }
 
     @GetMapping("/login")
@@ -35,11 +38,20 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String performRegistration(@ModelAttribute ("person") @Valid Person person
-    , BindingResult bindingResult){ // мы здесь получаем нашу модель, также валидируем у нас есть правила в entity class
-        personValidator.validate(person,bindingResult);
+    public String performRegistration(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
 
-        return "";
+        if (bindingResult.hasErrors()) {
+            // Если есть ошибки валидации, возвращаем обратно на страницу регистрации
+            return "auth/registration";
+        }
+
+        // Если ошибок нет, регистрируем пользователя
+        peopleService.register(person);
+
+        // Перенаправляем на страницу входа
+        return "redirect:/auth/login";
     }
+
 
 }

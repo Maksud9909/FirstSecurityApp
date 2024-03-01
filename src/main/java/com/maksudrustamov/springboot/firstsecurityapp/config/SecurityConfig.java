@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // тут мы пишем условия
         httpSecurity.csrf().disable() // отключаем защиту от межсайтовой поделки
                 .authorizeRequests()
-                .antMatchers("/auth/login","/error").permitAll() // если ноунейм юзер заходит мы его пускаем
+                .antMatchers("/auth/login","/error","/auth/registration").permitAll() // если ноунейм юзер заходит мы его пускаем
                 .anyRequest().authenticated()// для всех остальных запросов пользователь должен быть аутентифицированным
                 .and()
                 .formLogin().loginPage("/auth/login") // тут мы пишем где кастомная страница нужна для аутентификации
