@@ -2,7 +2,6 @@ package com.maksudrustamov.springboot.firstsecurityapp.config;
 
 import com.maksudrustamov.springboot.firstsecurityapp.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Конфигирируем Spring Security
-     * Конфигурируем Авторизацию
+     * Конфигурируем Авторизацию то есть саму страницу для аутентификации
      * @param httpSecurity в этот метод поступает http запрос
      */
     protected void configure(HttpSecurity httpSecurity) throws Exception{
@@ -36,11 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // тут мы пишем условия
         httpSecurity.csrf().disable() // отключаем защиту от межсайтовой поделки
                 .authorizeRequests()
-                .antMatchers("/auth/login","/error").permitAll()
-                .anyRequest().authenticated()// мы пускаем любого юзера
+                .antMatchers("/auth/login","/error").permitAll() // если ноунейм юзер заходит мы его пускаем
+                .anyRequest().authenticated()// для всех остальных запросов пользователь должен быть аутентифицированным
                 .and()
-                .formLogin().loginPage("/auth/login") // тут мы пишем какая кастомная страница нужна для аутентификации
-                .loginProcessingUrl("/process_login") // затем в какую страницу мы должны отправить (/process_login)
+                .formLogin().loginPage("/auth/login") // тут мы пишем где кастомная страница нужна для аутентификации
+                .loginProcessingUrl("/process_login") // куда мы хотим отправлять данные с формы (/process_login)
                 .defaultSuccessUrl("/hello",true)// куда мы попадем в случае успешной аутентификации, второй, чтобы по любому нас туда отправлял в случае успеха
                 .failureUrl("/auth/login?error"); // мы здесь говорим, что если не получится, то нужно идти в страницу error
     }
