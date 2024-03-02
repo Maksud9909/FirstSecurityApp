@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            display: block;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>Hello world</h1>
-<!--<p th:text="${personInfo.getUsername()}"></p>-->
-<!--<p th:text="${personInfo.getPerson().getYearOfBirth()}"></p>-->
+<a href="/logout">logout</a>
 </body>
 </html>
-

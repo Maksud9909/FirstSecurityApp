@@ -3,6 +3,7 @@ package com.maksudrustamov.springboot.firstsecurityapp.service;
 import com.maksudrustamov.springboot.firstsecurityapp.entity.Person;
 import com.maksudrustamov.springboot.firstsecurityapp.repository.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,12 +11,13 @@ import java.util.Optional;
 
 @Service
 public class PeopleService {
-    PeopleRepository peopleRepository;
+    private final PeopleRepository peopleRepository;
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    public PeopleService(PeopleRepository peopleRepository) {
+    public PeopleService(PeopleRepository peopleRepository, PasswordEncoder passwordEncoder) {
         this.peopleRepository = peopleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     public Optional<Person> findByUsername(String username){
         return peopleRepository.findByUsername(username);
@@ -23,6 +25,9 @@ public class PeopleService {
 
     @Transactional // так как нам нужно менять базу данных
     public void register(Person person){
+        String encodedPassword = passwordEncoder.encode(person.getPassword()); // он так шифрует пароль
+
+        person.setPassword(encodedPassword); // мы добавили этот пароль человеку
         peopleRepository.save(person); // он добавляет нового человека в базу при регистрации
     }
 }

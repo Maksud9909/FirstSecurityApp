@@ -2,14 +2,10 @@ package com.maksudrustamov.springboot.firstsecurityapp.util;
 
 import com.maksudrustamov.springboot.firstsecurityapp.entity.Person;
 import com.maksudrustamov.springboot.firstsecurityapp.service.PeopleService;
-import com.maksudrustamov.springboot.firstsecurityapp.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
 import java.util.Optional;
 
 @Component
@@ -27,7 +23,7 @@ public class PersonValidator implements Validator {
     } // мы здесь указываем какому классу нужен валидатор
 
     @Override
-    public void validate(Object o, Errors errors) {
+    public void validate(Object o, Errors errors) { //
         Person person = (Person) o;
         Optional<Person> optionalPerson = peopleService.findByUsername(person.getUsername());
         if (optionalPerson.isPresent()){

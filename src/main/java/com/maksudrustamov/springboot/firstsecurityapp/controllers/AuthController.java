@@ -33,7 +33,6 @@ public class AuthController {
 
     @GetMapping("/registration")
     public String registrationPage(@ModelAttribute("person")Person person){ // в модель положит пустого человека для фронта
-
         return "auth/registration";
     }
 
