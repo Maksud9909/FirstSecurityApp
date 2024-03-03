@@ -51,6 +51,4 @@ public class AuthController {
         // Перенаправляем на страницу входа
         return "redirect:/auth/login";
     }
-
-
 }

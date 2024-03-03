@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -21,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity // это дает понять Spring, что это конфигурационный файл для Security
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    PersonDetailsService personDetailsService;
+    PersonDetailsService personDetailsService; //
     @Autowired
     public SecurityConfig(PersonDetailsService personDetailsService) {
         this.personDetailsService = personDetailsService;
@@ -32,11 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * Конфигурируем Авторизацию то есть саму страницу для аутентификации
      * @param httpSecurity в этот метод поступает http запрос
      */
+    @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
 
 
         // тут мы пишем условия
-        httpSecurity.csrf().disable() // отключаем защиту от межсайтовой поделки
+        httpSecurity
                 .authorizeRequests()
                 .antMatchers("/auth/login","/error","/auth/registration").permitAll() // если ноунейм юзер заходит мы его пускаем
                 .anyRequest().authenticated()// для всех остальных запросов пользователь должен быть аутентифицированным

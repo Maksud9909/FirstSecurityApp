@@ -30,11 +30,21 @@ public class PersonValidator implements Validator {
             errors.rejectValue("username","","Человек с таким именем пользователя уже существует");
         }
     }
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
