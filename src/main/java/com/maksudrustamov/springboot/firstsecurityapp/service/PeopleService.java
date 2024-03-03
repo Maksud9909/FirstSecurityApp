@@ -26,6 +26,7 @@ public class PeopleService {
     @Transactional // так как нам нужно менять базу данных
     public void register(Person person){
         String encodedPassword = passwordEncoder.encode(person.getPassword()); // он так шифрует пароль
+        person.setRole("ROLE_USER");
 
         person.setPassword(encodedPassword); // мы добавили этот пароль человеку
         peopleRepository.save(person); // он добавляет нового человека в базу при регистрации

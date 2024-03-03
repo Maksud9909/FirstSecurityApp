@@ -30,6 +30,8 @@ public class Person {
 
     @Column(name = "password")
     private String password;
+    @Column(name = "role")
+    private String role;
 
     public Person() {
     }
@@ -39,15 +41,7 @@ public class Person {
         this.yearOfBirth = yearOfBirth;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", yearOfBirth=" + yearOfBirth +
-                ", password='" + password + '\'' +
-                '}';
-    }
+
 
     public int getId() {
         return id;
@@ -79,5 +73,24 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

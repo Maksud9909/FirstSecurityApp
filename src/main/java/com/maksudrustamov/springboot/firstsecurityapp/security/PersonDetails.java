@@ -2,9 +2,11 @@ package com.maksudrustamov.springboot.firstsecurityapp.security;
 
 import com.maksudrustamov.springboot.firstsecurityapp.entity.Person;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class PersonDetails implements UserDetails {
     private final Person person;
@@ -16,7 +18,7 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { // права доступа, к какому-то юзеру нельзя будет заходить куда-то
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
     }
 
     @Override
