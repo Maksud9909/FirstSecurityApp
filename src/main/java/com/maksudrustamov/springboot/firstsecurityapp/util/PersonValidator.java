@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 public class PersonValidator implements Validator {
-    PeopleService peopleService;
+    private final PeopleService peopleService;
 
     @Autowired
     public PersonValidator(PeopleService peopleService) {

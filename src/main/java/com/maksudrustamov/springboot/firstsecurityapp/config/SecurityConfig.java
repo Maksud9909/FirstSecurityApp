@@ -22,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // теперь мы можем использовать аннотацию PreAuthority
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    PersonDetailsService personDetailsService; //
+    private final PersonDetailsService personDetailsService;
     @Autowired
     public SecurityConfig(PersonDetailsService personDetailsService) {
         this.personDetailsService = personDetailsService;
@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // тут мы пишем условия
         httpSecurity
                 .authorizeRequests()
-//                .antMatchers("/admin").hasRole("ADMIN") // для доступа к этой странице у тебя должен быть ADMIN
+                .antMatchers("/admin").hasRole("ADMIN") // для доступа к этой странице у тебя должен быть ADMIN
                 .antMatchers("/auth/login","/error","/auth/registration").permitAll() // если ноунейм юзер заходит мы его пускаем
                 .anyRequest().hasAnyRole("USER","ADMIN")// для всех остальных страниц все имеют доступ
                 .and()
