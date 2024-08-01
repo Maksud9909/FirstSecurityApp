@@ -22,6 +22,9 @@ public class PersonValidator implements Validator {
         return Person.class.equals(aClass);
     } // мы здесь указываем какому классу нужен валидатор
 
+
+
+    // если имя пользователя существует при регистрации, то будет выбрашено исключение
     @Override
     public void validate(Object o, Errors errors) { //
         Person person = (Person) o;
